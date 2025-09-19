@@ -9,7 +9,7 @@ MENU_CONFIG = {
     "groups": [
         {
             "title": "📊 VISUALIZAÇÃO DE DADOS",
-            "color": "blue",
+            "color": "purple",
             "options": [
                 {
                     "number": 1,
@@ -90,7 +90,7 @@ def main():
         )
 
         if resposta.lower() == "s":
-            menu.console.print("[bold blue]Gerando dados simulados...[/bold blue]")
+            menu.console.print("[bold purple]Gerando dados simulados...[/bold purple]")
             dados_simulados = simulador.generate_data()
             data_manager.save_data(dados_simulados)
             dados_consumo = dados_simulados

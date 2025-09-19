@@ -4,6 +4,20 @@ from rich.panel import Panel
 from rich.table import Table
 from rich.prompt import Prompt, IntPrompt, InvalidResponse
 from rich.text import Text
+from rich.theme import Theme
+import re
+
+
+custom_theme = Theme(
+    {
+        "red": "#ff5555",
+        "green": "#50fa7b",
+        "yellow": "#f1fa8c",
+        "cyan": "#8be9fd",
+        "purple": "#bd93f9",
+        "magenta": "#ff79c6",
+    }
+)
 
 
 def clear_console():
@@ -13,7 +27,9 @@ def clear_console():
     else:
         _ = system("clear")
 
-console = Console()
+
+console = Console(theme=custom_theme)
+
 
 def show_main_menu(config):
     """Exibe o menu principal estilizado com grupos e cores"""
@@ -57,23 +73,31 @@ def get_menu_option_description(option_number, config):
                 return option["description"]
     return None
 
+
 class PromptPT(Prompt):
     def process_response(self, value: str):
         try:
             return super().process_response(value)
         except InvalidResponse:
-            raise InvalidResponse("\n[bold red]❌ Selecione uma das opções disponíveis.[/bold red]\n")
+            raise InvalidResponse(
+                "\n[bold red]❌ Selecione uma das opções disponíveis.[/bold red]\n"
+            )
+
 
 def ask_input(prompt_text="Escolha uma opção: ", choices=None):
     """Solicita uma entrada do usuário."""
     return PromptPT.ask(prompt_text, choices=choices)
+
 
 class IntPromptPT(IntPrompt):
     def process_response(self, value: str):
         try:
             return int(value)
         except ValueError:
-            raise InvalidResponse("\n[bold red]❌ Por favor, digite um número inteiro válido.[/bold red]\n")
+            raise InvalidResponse(
+                "\n[bold red]❌ Por favor, digite um número inteiro válido.[/bold red]\n"
+            )
+
 
 def ask_input_int(prompt_text="Escolha uma opção: ", default=None):
     """Solicita um número inteiro do usuário."""
@@ -89,13 +113,15 @@ def show_data(data, title="Registros de Consumo"):
     if isinstance(data, dict):
         data = [data]
 
-    table = Table(title=f"📋 {title}", show_header=True, header_style="bold bright_white")
+    table = Table(
+        title=f"📋 {title}", show_header=True, header_style="bold bright_white"
+    )
     table.add_column("🆔 ID", style="white", width=6)
     table.add_column("🧪 Nome do Insumo", min_width=20, style="cyan")
     table.add_column("📦 Lote", style="yellow")
     table.add_column("📊 Qtd. Consumida", justify="right", style="green")
     table.add_column("📅 Data Consumo", style="magenta")
-    table.add_column("⏰ Validade", style="dark_magenta")
+    table.add_column("⏰ Validade", style="purple")
 
     for item in data:
         table.add_row(

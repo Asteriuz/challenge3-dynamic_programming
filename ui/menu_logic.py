@@ -41,17 +41,17 @@ def search_binary(dados_consumo):
 
 def sort_merge(dados_consumo):
     """Opção 5: Ordenação (Merge Sort)"""
-    _sort_data(dados_consumo, "Merge Sort", ordenacao.merge_sort, "⚡")
+    _sort_data(dados_consumo, "Merge Sort", ordenacao.merge_sort)
 
 
 def sort_quick(dados_consumo):
     """Opção 6: Ordenação (Quick Sort)"""
-    _sort_data(dados_consumo, "Quick Sort", ordenacao.quick_sort, "🚀")
+    _sort_data(dados_consumo, "Quick Sort", ordenacao.quick_sort)
 
 
-def _sort_data(dados_consumo, algoritmo, sort_function, icon):
+def _sort_data(dados_consumo, algoritmo, sort_function):
     """Função auxiliar para ordenação"""
-    menu.show_message(f"📈 Ordenando com [bold]{algoritmo}[/bold]...", "bold blue")
+    menu.show_message(f"📈 Ordenando com [bold]{algoritmo}[/bold]...", "yellow")
 
     chave_menu = {
         "1": ("id_insumo", "🆔 ID do Insumo"),
@@ -65,7 +65,7 @@ def _sort_data(dados_consumo, algoritmo, sort_function, icon):
     opcoes_texto = "\n".join([f"[{k}] {v[1]}" for k, v in chave_menu.items()])
     menu.show_message(
         f"[bold]Escolha o campo para ordenação:[/bold]\n{opcoes_texto}",
-        "cyan",
+        "white",
         new_line_start=False,
     )
 
@@ -80,14 +80,14 @@ def _sort_data(dados_consumo, algoritmo, sort_function, icon):
     fim = time.time()
     tempo_ordenacao = (fim - inicio) * 1000
 
-    titulo = f"{icon} Insumos Ordenados por '{chave}' usando {algoritmo} (⏱️ Tempo: {tempo_ordenacao:.2f}ms)"
+    titulo = f"Insumos Ordenados por '{chave}' usando {algoritmo} (⏱️ Tempo: {tempo_ordenacao:.2f}ms)"
     menu.show_data(dados_ordenados, titulo)
 
 
 def regenerate_data():
     """Opção 7: Regenerar Dados Simulados"""
     num_registros = menu.ask_input_int("📊 Quantos registros deseja gerar?", default=50)
-    menu.show_message("🔄 Regenerando dados simulados...", "bold blue")
+    menu.show_message("🔄 Regenerando dados simulados...", "bold purple")
     dados_simulados = simulador.generate_data(num_registros)
     data_manager.save_data(dados_simulados)
 
