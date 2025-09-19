@@ -79,8 +79,9 @@ def _sort_data(dados_consumo, algoritmo, sort_function):
     dados_ordenados = sort_function(dados_consumo, chave)
     fim = time.time()
     tempo_ordenacao = (fim - inicio) * 1000
+    tempo_ordenacao_formatado = f"{tempo_ordenacao:.2f}".replace('.', ',')
 
-    titulo = f"Insumos Ordenados por '{chave}' usando {algoritmo} (⏱️ Tempo: {tempo_ordenacao:.2f}ms)"
+    titulo = f"Insumos Ordenados por '{chave}' usando {algoritmo} (⏱️ Tempo: {tempo_ordenacao_formatado}ms)"
     menu.show_data(dados_ordenados, titulo)
 
 
