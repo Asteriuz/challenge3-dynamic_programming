@@ -1,11 +1,13 @@
 from collections import deque
 
+
 class FilaConsumo:
     """Estrutura de Fila para gerenciar consumo em ordem cronológica (FIFO)."""
+
     def __init__(self, items_iniciais=None):
         if items_iniciais is None:
             items_iniciais = []
-        # A deque é altamente otimizada para appends e pops em ambas as extremidades
+
         self.fila = deque(items_iniciais)
 
     def add(self, item):
@@ -26,14 +28,16 @@ class FilaConsumo:
         """Retorna uma lista com todos os items na ordem da fila."""
         return list(self.fila)
 
+
 class PilhaConsumo:
     """Estrutura de Pilha para gerenciar consumo em ordem inversa (LIFO)."""
+
     def __init__(self, items_iniciais=None):
         if items_iniciais is None:
             items_iniciais = []
         self.pilha = list(items_iniciais)
 
-    def push(self, item):
+    def append(self, item):
         """Adiciona um item ao topo da pilha."""
         self.pilha.append(item)
 
@@ -42,7 +46,7 @@ class PilhaConsumo:
         if not self.is_empty():
             return self.pilha.pop()
         return None
-    
+
     def is_empty(self):
         """Verifica se a pilha está vazia."""
         return not self.pilha

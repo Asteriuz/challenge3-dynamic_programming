@@ -1,11 +1,19 @@
+from os import system, name
 from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
-from rich.prompt import Prompt, IntPrompt
+from rich.prompt import Prompt, IntPrompt, InvalidResponse
 from rich.text import Text
 
-console = Console()
 
+def clear_console():
+    """Limpa o console de forma cross-platform."""
+    if name == "nt":
+        _ = system("cls")
+    else:
+        _ = system("clear")
+
+console = Console()
 
 def show_main_menu(config):
     """Exibe o menu principal estilizado com grupos e cores"""
@@ -49,15 +57,27 @@ def get_menu_option_description(option_number, config):
                 return option["description"]
     return None
 
+class PromptPT(Prompt):
+    def process_response(self, value: str):
+        try:
+            return super().process_response(value)
+        except InvalidResponse:
+            raise InvalidResponse("\n[bold red]❌ Selecione uma das opções disponíveis.[/bold red]\n")
 
 def ask_input(prompt_text="Escolha uma opção: ", choices=None):
     """Solicita uma entrada do usuário."""
-    return Prompt.ask(prompt_text, choices=choices)
+    return PromptPT.ask(prompt_text, choices=choices)
 
+class IntPromptPT(IntPrompt):
+    def process_response(self, value: str):
+        try:
+            return int(value)
+        except ValueError:
+            raise InvalidResponse("\n[bold red]❌ Por favor, digite um número inteiro válido.[/bold red]\n")
 
 def ask_input_int(prompt_text="Escolha uma opção: ", default=None):
     """Solicita um número inteiro do usuário."""
-    return IntPrompt.ask(prompt_text, default=default)
+    return IntPromptPT.ask(prompt_text, default=default)
 
 
 def show_data(data, title="Registros de Consumo"):
@@ -90,6 +110,9 @@ def show_data(data, title="Registros de Consumo"):
     console.print(table, new_line_start=True, end="\n\n")
 
 
-def show_message(message, style="bold green"):
+def show_message(message, style="bold green", new_line_start=True):
     """Exibe uma mensagem simples estilizada."""
-    console.print(f"\n[{style}]{message}[/{style}]\n")
+    if new_line_start:
+        console.print(f"\n[{style}]{message}[/{style}]\n")
+    else:
+        console.print(f"[{style}]{message}[/{style}]\n")
