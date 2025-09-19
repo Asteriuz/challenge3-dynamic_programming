@@ -122,7 +122,7 @@ def main():
 
     while True:
         menu.show_main_menu(MENU_CONFIG)
-        opcao_input_str = "[bold green]>[/bold green] Digite o número da sua opção [bold magenta][1-9][/bold magenta]: "
+        opcao_input_str = "[bold green]>[/bold green] Digite o número da sua opção [bold magenta][1-9][/bold magenta]"
         opcao = menu.ask_input_int("\n" + opcao_input_str)
         valid_options = menu.get_valid_menu_options(MENU_CONFIG)
 
