@@ -48,9 +48,21 @@ def quick_sort(lista, chave):
 
 if __name__ == "__main__":
     dados_teste = [
-        {"nome_insumo": "Reagente A", "quantidade_consumida": 50, "validade": "2024-12-31"},
-        {"nome_insumo": "Reagente B", "quantidade_consumida": 20, "validade": "2023-11-30"},
-        {"nome_insumo": "Reagente C", "quantidade_consumida": 75, "validade": "2025-01-15"},
+        {
+            "nome_insumo": "Reagente A",
+            "quantidade_consumida": 50,
+            "validade": "2024-12-31",
+        },
+        {
+            "nome_insumo": "Reagente B",
+            "quantidade_consumida": 20,
+            "validade": "2023-11-30",
+        },
+        {
+            "nome_insumo": "Reagente C",
+            "quantidade_consumida": 75,
+            "validade": "2025-01-15",
+        },
     ]
 
     print("Dados Originais:")

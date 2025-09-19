@@ -148,7 +148,9 @@ def main():
             menu.show_message("❌ Opção não implementada.", "bold red")
 
         if opcao != 9:
-            menu.console.print("[cyan]\nPressione [bold]Enter[/bold] para voltar ao menu...[/cyan]")
+            menu.console.print(
+                "[cyan]\nPressione [bold]Enter[/bold] para voltar ao menu...[/cyan]"
+            )
             menu.ask_input("")
             menu.clear_console()
 

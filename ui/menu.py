@@ -5,8 +5,6 @@ from rich.table import Table
 from rich.prompt import Prompt, IntPrompt, InvalidResponse
 from rich.text import Text
 from rich.theme import Theme
-import re
-
 
 custom_theme = Theme(
     {
@@ -107,7 +105,7 @@ def ask_input_int(prompt_text="Escolha uma opção: ", default=None):
 def show_data(data, title="Registros de Consumo"):
     """Exibe uma lista de dados de consumo em uma tabela bonita."""
     if not data:
-        console.print(f"[bold red]❌ Nenhum dado para exibir.[/bold red]")
+        console.print("[bold red]❌ Nenhum dado para exibir.[/bold red]")
         return
 
     if isinstance(data, dict):
