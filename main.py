@@ -50,7 +50,7 @@ MENU_CONFIG = {
             ],
         },
         {
-            "title": "⚙️  GERENCIAMENTO",
+            "title": "🔧 GERENCIAMENTO",
             "color": "cyan",
             "options": [
                 {
@@ -157,4 +157,7 @@ def main():
 
 if __name__ == "__main__":
     menu.clear_console()
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        menu.show_message("\n👋 Saindo do sistema. Até logo!", "bold magenta")
