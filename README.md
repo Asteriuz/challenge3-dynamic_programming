@@ -83,7 +83,7 @@ Você pode usar **pip** (tradicional) ou **uv** (recomendado, mais rápido e sim
    pip install uv
    ```
 
-3. **Sincronize as dependências automaticamente:**
+3. **Sincronize as dependências automaticamente (Opcional | _uv run realiza o sync antes_):**
 
    ```sh
    uv sync

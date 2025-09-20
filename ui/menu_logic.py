@@ -3,6 +3,13 @@ from core import busca, ordenacao
 from utils import data_manager, simulador
 from . import menu
 
+def medir_tempo(func, *args, **kwargs):
+    inicio = time.perf_counter()
+    resultado = func(*args, **kwargs)
+    fim = time.perf_counter()
+    tempo_ms = (fim - inicio) * 1000
+    tempo_formatado = f"{tempo_ms:.2f}".replace(".", ",")
+    return resultado, tempo_formatado
 
 def view_data_queue(fila):
     """Opção 1: Visualizar Consumo (Fila - Cronológico)"""
@@ -17,9 +24,12 @@ def view_data_stack(pilha):
 def search_sequential(dados_consumo):
     """Opção 3: Buscar Insumo (Busca Sequencial)"""
     nome_insumo = menu.ask_input("🔍 Digite o nome do insumo a buscar")
-    resultado = busca.busca_sequencial(dados_consumo, "nome_insumo", nome_insumo)
+    resultado, tempo_busca_formatado = medir_tempo(busca.busca_sequencial, dados_consumo, "nome_insumo", nome_insumo)
     if resultado:
-        menu.show_data(resultado, f"Resultado da Busca Sequencial por '{nome_insumo}'")
+        menu.show_data(
+            resultado,
+            f"Resultado da Busca Sequencial por '{nome_insumo}' (⏱️ Tempo: {tempo_busca_formatado}ms)"
+        )
     else:
         menu.show_message(f"❌ Insumo '{nome_insumo}' não encontrado.", "bold red")
 
@@ -32,9 +42,9 @@ def search_binary(dados_consumo):
     # A busca binária exige uma lista ordenada
     dados_ordenados = sorted(dados_consumo, key=lambda x: x["nome_insumo"])
     nome_insumo = menu.ask_input("🔍 Digite o nome do insumo a buscar")
-    resultado = busca.busca_binaria(dados_ordenados, "nome_insumo", nome_insumo)
+    resultado, tempo_busca_formatado = medir_tempo(busca.busca_binaria, dados_ordenados, "nome_insumo", nome_insumo)
     if resultado:
-        menu.show_data(resultado, f"Resultado da Busca Binária por '{nome_insumo}'")
+        menu.show_data(resultado, f"Resultado da Busca Binária por '{nome_insumo}' (⏱️ Tempo: {tempo_busca_formatado}ms)")
     else:
         menu.show_message(f"❌ Insumo '{nome_insumo}' não encontrado.", "bold red")
 
@@ -75,12 +85,7 @@ def _sort_data(dados_consumo, algoritmo, sort_function):
     )
     chave, _ = chave_menu.get(chave_ordenacao, ("id_insumo", "ID do Insumo"))
 
-    inicio = time.time()
-    dados_ordenados = sort_function(dados_consumo, chave)
-    fim = time.time()
-    tempo_ordenacao = (fim - inicio) * 1000
-    tempo_ordenacao_formatado = f"{tempo_ordenacao:.2f}".replace('.', ',')
-
+    dados_ordenados, tempo_ordenacao_formatado = medir_tempo(sort_function, dados_consumo, chave)
     titulo = f"Insumos Ordenados por '{chave}' usando {algoritmo} (⏱️ Tempo: {tempo_ordenacao_formatado}ms)"
     menu.show_data(dados_ordenados, titulo)
 

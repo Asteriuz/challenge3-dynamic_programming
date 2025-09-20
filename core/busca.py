@@ -3,36 +3,52 @@ def busca_sequencial(lista, chave, valor):
 
     Complexidade: O(n), onde n é o tamanho da lista.
     """
+    resultados = []
+    valor_busca = str(valor).lower()
     for item in lista:
-        if str(item.get(chave)).lower() == str(valor).lower():
-            return item
-    return None
+        campo = str(item.get(chave)).lower()
+        if valor_busca in campo:
+            resultados.append(item)
+    return resultados if resultados else None
 
 
 def busca_binaria(lista_ordenada, chave, valor):
-    """
-    Realiza uma busca binária em uma lista de dicionários.
+    """Realiza uma busca binária em uma lista de dicionários.
     A lista DEVE estar pré-ordenada pela 'chave'.
 
     Complexidade: O(log n), onde n é o tamanho da lista.
     """
     baixo, alto = 0, len(lista_ordenada) - 1
-
     valor_busca = str(valor).lower()
+    resultados = []
 
     while baixo <= alto:
         meio = (baixo + alto) // 2
-
         valor_meio_obj = lista_ordenada[meio].get(chave)
         valor_meio = str(valor_meio_obj).lower()
 
-        if valor_meio < valor_busca:
+        if valor_busca in valor_meio:
+            i = meio
+            while i >= 0:
+                campo = str(lista_ordenada[i].get(chave)).lower()
+                if valor_busca in campo:
+                    resultados.append(lista_ordenada[i])
+                    i -= 1
+                else:
+                    break
+            i = meio + 1
+            while i < len(lista_ordenada):
+                campo = str(lista_ordenada[i].get(chave)).lower()
+                if valor_busca in campo:
+                    resultados.append(lista_ordenada[i])
+                    i += 1
+                else:
+                    break
+            return resultados
+        elif valor_meio < valor_busca:
             baixo = meio + 1
-        elif valor_meio > valor_busca:
-            alto = meio - 1
         else:
-            return lista_ordenada[meio]
-
+            alto = meio - 1
     return None
 
 
