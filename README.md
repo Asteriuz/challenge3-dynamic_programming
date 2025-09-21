@@ -3,13 +3,15 @@
 ![Python Version](https://img.shields.io/badge/python-3.13%2B-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
+## 🌐 Link do Projeto
+
+Acesse o repositório completo no GitHub: [Asteriuz/challenge3-dynamic_programming](https://github.com/Asteriuz/challenge3-dynamic_programming)
+
 ## 📖 Sobre o Projeto
 
 Este projeto foi desenvolvido como uma solução para o desafio de gerenciar o consumo de insumos em unidades de diagnóstico. A falta de um registro preciso dificulta o controle de estoque e a previsão de reposição.
 
 A aplicação simula o consumo diário de insumos (reagentes, descartáveis, etc.) e utiliza estruturas de dados e algoritmos clássicos para organizar e consultar esses dados de forma eficiente, tudo através de uma interface de linha de comando interativa e amigável construída com a biblioteca `rich`.
-
----
 
 ## ✨ Funcionalidades Principais
 
@@ -26,14 +28,10 @@ O sistema oferece um menu com diversas opções para manipulação e visualizaç
   - **Quick Sort**: Oferece uma alternativa de ordenação rápida (em média) para os mesmos campos.
 - **Persistência de Dados**: Os dados simulados são salvos em um arquivo `consumo.json`, permitindo que o estado da aplicação seja mantido entre as execuções.
 
----
-
 ## 🚀 Tecnologias Utilizadas
 
 - **[Python 3.13+](https://www.python.org/)**: Linguagem principal do projeto.
 - **[Rich](https://github.com/Textualize/rich)**: Para criar uma interface de linha de comando rica e colorida, com tabelas, painéis e texto estilizado.
-
----
 
 ## 🛠️ Instalação e Execução
 
@@ -112,8 +110,6 @@ Você pode usar **pip** (tradicional) ou **uv** (recomendado, mais rápido e sim
 - **Ordenação (`core/ordenacao.py`)**:
   - `merge_sort`: Um algoritmo de "dividir para conquistar" que divide a lista em metades, ordena-as recursivamente e depois as mescla. Garante uma complexidade de **O(n log n)** em todos os casos.
   - `quick_sort`: Também de "dividir para conquistar", escolhe um pivô e particiona a lista. Sua complexidade média é **O(n log n)**, mas pode degradar para **O(n²)** no pior caso. A implementação aqui é _out-of-place_ para maior simplicidade.
-
----
 
 ## 📂 Estrutura do Projeto
 
